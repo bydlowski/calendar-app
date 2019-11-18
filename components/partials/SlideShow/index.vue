@@ -11,7 +11,7 @@
           class="carousel-cell is-pointer"
         >
           <span class="overlay" />
-          <div class="content m-l-lg m-b-lg has-text-centered">
+          <div class="content m-b-lg has-text-centered">
             <p class="title is-3 has-text-white m-b-xs">
               {{ highlight.name }}
             </p>

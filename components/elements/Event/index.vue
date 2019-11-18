@@ -211,6 +211,12 @@ export default {
     @media screen and (max-width: 1400px) {
       width: 180px;
     }
+    @media screen and (max-width: 1220px) {
+      width: 380px;
+    }
+    @media screen and (max-width: 600px) {
+      width: 300px;
+    }
   }
   .applied-tag {
     text-align: center;

@@ -4,13 +4,21 @@
       <flickity ref="flickity" :options="flickityOptions">
         <div
           v-for="highlight in highlights"
-          :key="highlight.title"
-          :style="{ backgroundColor: highlight.bg }"
-          class="carousel-cell is-center-flex"
+          :key="highlight.name"
+          :style="{ backgroundImage: `url(${highlight.cover})` }"
+          :title="`Learn more about the event ${highlight.name}`"
+          @click="openEventModal(highlight)"
+          class="carousel-cell is-pointer"
         >
-          <p class="title is-4">
-            {{ highlight.title }}
-          </p>
+          <span class="overlay" />
+          <div class="content m-l-lg m-b-lg has-text-centered">
+            <p class="title is-3 has-text-white m-b-xs">
+              {{ highlight.name }}
+            </p>
+            <p class="title is-5 has-text-white">
+              {{ highlight.startDate | moment("MMMM Do YYYY") }}
+            </p>
+          </div>
         </div>
       </flickity>
     </client-only>
@@ -20,29 +28,39 @@
 <script>
 export default {
   name: 'SlideShow',
+  props: {
+    events: {
+      type: Array,
+      required: true
+    }
+  },
   data () {
     return {
-      highlights: [
-        {
-          title: 'Highlight event 1',
-          bg: '#00BD9D'
-        },
-        {
-          title: 'Highlight event 2',
-          bg: '#F0D2D1'
-        },
-        {
-          title: 'Highlight event 3',
-          bg: '#F6EFA6'
-        }
-      ],
+      highlights: [],
       flickityOptions: {
         initialIndex: 0,
-        autoPlay: true,
+        // autoPlay: true,
         prevNextButtons: true,
         pageDots: true,
-        wrapAround: true
+        wrapAround: true,
+        draggable: false
       }
+    }
+  },
+  created () {
+    this.highlights = this.events
+      .filter(event => event.promoted)
+      .map(event => ({
+        id: event.id,
+        name: event.name,
+        cover: event.cover,
+        startDate: event.startDate
+      }))
+  },
+  methods: {
+    openEventModal (highlight) {
+      const event = this.events.find(event => event.id === highlight.id)
+      this.$store.dispatch('modal/openEventModal', event)
     }
   }
 }
@@ -56,5 +74,23 @@ export default {
     background: #8C8;
     border-radius: 5px;
     counter-increment: carousel-cell;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: linear-gradient(0deg, rgba(17,17,17,0.9570203081232493) 0%, rgba(17,17,17,0.654499299719888) 60%, rgba(255,255,255,0.052258403361344574) 100%);
+  }
+  .content {
+    z-index: 15;
   }
 </style>

@@ -1,7 +1,10 @@
 <template>
   <main>
     <Header v-if="loaded" />
-    <SlideShow v-if="loaded" />
+    <SlideShow
+      v-if="loaded"
+      :events="events.result"
+    />
     <section v-if="loaded" class="columns is-mobile is-multiline m-t-xl">
       <div class="column is-3-widescreen is-12-desktop is-12-tablet is-12-mobile">
         <FilterList :events="events.result" />

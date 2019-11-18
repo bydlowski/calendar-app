@@ -1,6 +1,6 @@
 <template>
   <main>
-    <Header />
+    <Header v-if="loaded" />
     <SlideShow v-if="loaded" />
     <section v-if="loaded" class="columns m-t-xl">
       <div class="column is-3">
@@ -10,12 +10,10 @@
         <EventList :events="events.result" />
       </div>
     </section>
-    {{ events }}
   </main>
 </template>
 
 <script>
-// import jsonEvents from '~/events.json'
 import Header from '~/components/partials/Header'
 import SlideShow from '~/components/partials/SlideShow'
 import FilterList from '~/components/partials/FilterList'
@@ -30,15 +28,9 @@ export default {
   },
   data () {
     return {
-      // loaded: false
-      // events: null
       loadingComponent: null
     }
   },
-  // async fetch ({ store, params }) {
-  //   await store.dispatch('getEventsFromApi')
-  //   // .then(await store.dispatch('purchase/getPlanDueDates'))
-  // },
   computed: {
     events () {
       return this.$store.state.events.allEvents
@@ -67,7 +59,6 @@ export default {
     }
   },
   created () {
-    // this.events = jsonEvents
     this.$store.dispatch('events/getEventsFromApi')
   },
   mounted () {

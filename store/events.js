@@ -9,12 +9,6 @@ export const state = () => ({
 })
 
 export const mutations = {
-  // getAllEventsFromApi (state) {
-  //   console.log('GET EVNTS')
-  //   const apiEvents = getApiResponse()
-  //   state.allEvents = apiEvents
-  //   // console.log('apiEvents: ', apiEvents)
-  // },
   saveEventsFromApi (state, value) {
     state.allEvents = value
     state.loaded = true
@@ -23,8 +17,6 @@ export const mutations = {
 
 export const actions = {
   async getEventsFromApi (vuexContext) {
-    // await store.dispatch('post/getPostsFromPrisma', context.app.apolloProvider)
-    // vuexContext.commit('getAllEventsFromApi')
     const events = await this.$axios.$get(apiUrl)
     vuexContext.commit('saveEventsFromApi', events)
   }

@@ -152,8 +152,12 @@ export default {
     }
   },
   mounted () {
-    this.isFavorite = this.favorites.find(favorite => favorite === this.content.id)
-    this.isApplied = this.appliedList.find(applied => applied === this.content.id)
+    if (this.favorites) {
+      this.isFavorite = this.favorites.find(favorite => favorite === this.content.id)
+    }
+    if (this.appliedList) {
+      this.isApplied = this.appliedList.find(applied => applied === this.content.id)
+    }
   },
   methods: {
     openEventModal () {

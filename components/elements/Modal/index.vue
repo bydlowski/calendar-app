@@ -193,7 +193,9 @@ export default {
     this.areApplicationsOpen = moment(this.modalContent.endApplicationDate).isAfter(moment())
   },
   mounted () {
-    this.isApplied = this.appliedList.find(applied => applied === this.modalContent.id)
+    if (this.appliedList) {
+      this.isApplied = this.appliedList.find(applied => applied === this.modalContent.id)
+    }
   },
   methods: {
     clearEventModal () {

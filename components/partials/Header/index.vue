@@ -1,5 +1,5 @@
 <template>
-  <header class="columns">
+  <header class="columns is-mobile">
     <div class="column is-8 is-offset-2 header">
       <img
         :src="require(`@/static/logo.svg`)"

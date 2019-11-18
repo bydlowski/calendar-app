@@ -2,11 +2,11 @@
   <main>
     <Header v-if="loaded" />
     <SlideShow v-if="loaded" />
-    <section v-if="loaded" class="columns m-t-xl">
-      <div class="column is-3">
+    <section v-if="loaded" class="columns is-mobile is-multiline m-t-xl">
+      <div class="column is-3-widescreen is-12-desktop is-12-tablet is-12-mobile">
         <FilterList :events="events.result" />
       </div>
-      <div class="column is-9">
+      <div class="column is-9-widescreen is-12-desktop is-12-tablet is-12-mobile">
         <EventList :events="events.result" />
       </div>
     </section>

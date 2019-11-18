@@ -8,6 +8,11 @@
       aria-role="dialog"
       aria-modal
     >
+      <button
+        @click="clearEventModal"
+        type="button"
+        class="modal-close is-large close-btn"
+      />
       <div class="modal-card event-modal">
         <div class="modal-card-body event-modal-body">
           <figure class="image is-3by1">
@@ -220,7 +225,6 @@ export default {
 <style lang="scss" scoped>
   .event-modal {
     width: 100%;
-    // max-height: 80%;
 
     &-body {
       padding: 0;
@@ -229,5 +233,13 @@ export default {
   .horizontal-line {
     margin: 2px 20px;
     width: 20%;
+  }
+  .close-btn {
+    @media screen and (max-width: 1000px) {
+      z-index: 20;
+      top: 30px;
+      right: 30px;
+      background-color: rgba(10, 10, 10, 0.3);
+    }
   }
 </style>

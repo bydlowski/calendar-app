@@ -1,5 +1,5 @@
 <template>
-  <div class="column is-one-third">
+  <div class="column is-one-third-widescreen is-half-desktop">
     <div class="card">
       <div
         @click.prevent="toggleFavorite"
@@ -197,6 +197,16 @@ export default {
   }
   .card-title {
     width: 320px;
+
+    @media screen and (max-width: 1800px) {
+      width: 270px;
+    }
+    @media screen and (max-width: 1600px) {
+      width: 230px;
+    }
+    @media screen and (max-width: 1400px) {
+      width: 180px;
+    }
   }
   .applied-tag {
     text-align: center;

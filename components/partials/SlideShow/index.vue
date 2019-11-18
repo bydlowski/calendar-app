@@ -39,7 +39,7 @@ export default {
       highlights: [],
       flickityOptions: {
         initialIndex: 0,
-        // autoPlay: true,
+        autoPlay: true,
         prevNextButtons: true,
         pageDots: true,
         wrapAround: true,

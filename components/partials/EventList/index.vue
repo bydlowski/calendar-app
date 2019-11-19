@@ -10,7 +10,10 @@
         :content="event"
       />
     </div>
-    <p v-if="deadlineClosed.length" class="title is-2">
+    <p
+      v-if="deadlineClosed.length"
+      class="title is-2"
+    >
       Events with closed application
     </p>
     <div class="columns is-multiline">
@@ -19,6 +22,15 @@
         :key="`Deadline closed ${event.id}`"
         :content="event"
       />
+    </div>
+    <div
+      v-if="filteredEvents.length === 0"
+      class="is-vertical-center-flex"
+    >
+      <font-awesome-icon :icon="['fas', 'times-circle']" size="lg" />
+      <p class="title is-4 m-l-sm">
+        No events were found with these tags
+      </p>
     </div>
     <Modal v-if="idModalOpen" />
   </div>
@@ -107,12 +119,16 @@ export default {
       const lastApplicationDate = moment(now).add(this.activeApplicationTagValue, 'days')
       const lastStartDate = moment(now).add(this.activeStartTagValue, 'days')
       if (this.onlyFavorites) {
-        this.filteredEvents = this.events
-          .filter(event => this.favorites.includes(event.id))
-          .filter(event => this.activeTypeTags.includes(event.type))
-          .filter(event => this.activeLocationTags.includes(event.city))
-          .filter(event => moment(event.endApplicationDate).isBefore(lastApplicationDate))
-          .filter(event => moment(event.startDate).isBefore(lastStartDate))
+        if (!this.favorites) {
+          this.filteredEvents = []
+        } else {
+          this.filteredEvents = this.events
+            .filter(event => this.favorites.includes(event.id))
+            .filter(event => this.activeTypeTags.includes(event.type))
+            .filter(event => this.activeLocationTags.includes(event.city))
+            .filter(event => moment(event.endApplicationDate).isBefore(lastApplicationDate))
+            .filter(event => moment(event.startDate).isBefore(lastStartDate))
+        }
       } else {
         this.filteredEvents = this.events
           .filter(event => this.activeTypeTags.includes(event.type))

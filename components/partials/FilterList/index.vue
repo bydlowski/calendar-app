@@ -5,77 +5,79 @@
     >
       How can we help you?
     </h2>
-    <div class="tag-list m-b-md">
-      <p class="has-text-grey m-b-sm">
-        Event types
-      </p>
-      <b-taglist class="is-center-flex">
-        <b-tag
-          v-for="(type, index) in allTypeTags"
-          :key="`${type}-${index}`"
-          :type="checkActiveTypeTag(type)"
-          class="is-pointer tag-div-parent"
-          rounded
-          is-medium
-        >
+    <div class="columns">
+      <div class="tag-list m-b-md column is-half">
+        <p class="has-text-grey m-b-md">
+          Event types
+        </p>
+        <b-taglist class="columns is-aligned-flex-start">
           <div
             @click.prevent="toggleTag('type', type)"
             class="tag-div"
           >
-            {{ type }}
+            <b-tag
+              v-for="(type, index) in allTypeTags"
+              :key="`${type}-${index}`"
+              :type="checkActiveTypeTag(type)"
+              class="is-pointer tag-div-parent column is-10 is-offset-1"
+              rounded
+              is-medium
+            >
+              {{ type }}
+            </b-tag>
           </div>
-        </b-tag>
-        <b-tag
-          v-if="allTypeTags.length !== activeTypeTags.length"
-          type="is-light"
-          class="is-pointer tag-div-parent reset-tag"
-          rounded
-          is-medium
-        >
           <div
             @click.prevent="resetTags('type')"
             class="tag-div"
           >
-            <font-awesome-icon :icon="['fas', 'redo-alt']" size="xs" />
+            <b-tag
+              v-if="allTypeTags.length !== activeTypeTags.length"
+              type="is-light"
+              class="is-pointer tag-div-parent reset-tag"
+              rounded
+              is-medium
+            >
+              <font-awesome-icon :icon="['fas', 'redo-alt']" size="xs" />
+            </b-tag>
           </div>
-        </b-tag>
-      </b-taglist>
-    </div>
-    <div class="tag-list m-b-md">
-      <p class="has-text-grey m-b-sm">
-        Where?
-      </p>
-      <b-taglist class="is-center-flex">
-        <b-tag
-          v-for="(location, index) in allLocationTags"
-          :key="`${location}-${index}`"
-          :type="checkActiveLocationTag(location)"
-          class="is-pointer tag-div-parent"
-          rounded
-          is-medium
-        >
-          <div
-            @click.prevent="toggleTag('location', location)"
-            class="tag-div"
+        </b-taglist>
+      </div>
+      <div class="tag-list m-b-md column is-half">
+        <p class="has-text-grey m-b-md">
+          Where?
+        </p>
+        <b-taglist class="columns is-aligned-flex-start">
+          <b-tag
+            v-for="(location, index) in allLocationTags"
+            :key="`${location}-${index}`"
+            :type="checkActiveLocationTag(location)"
+            class="is-pointer tag-div-parent column is-10 is-offset-1"
+            rounded
+            is-medium
           >
-            {{ location }}
-          </div>
-        </b-tag>
-        <b-tag
-          v-if="allLocationTags.length !== activeLocationTags.length"
-          type="is-light"
-          class="is-pointer tag-div-parent reset-tag"
-          rounded
-          is-medium
-        >
-          <div
-            @click.prevent="resetTags('location')"
-            class="tag-div"
+            <div
+              @click.prevent="toggleTag('location', location)"
+              class="tag-div"
+            >
+              {{ location }}
+            </div>
+          </b-tag>
+          <b-tag
+            v-if="allLocationTags.length !== activeLocationTags.length"
+            type="is-light"
+            class="is-pointer tag-div-parent reset-tag"
+            rounded
+            is-medium
           >
-            <font-awesome-icon :icon="['fas', 'redo-alt']" size="xs" />
-          </div>
-        </b-tag>
-      </b-taglist>
+            <div
+              @click.prevent="resetTags('location')"
+              class="tag-div"
+            >
+              <font-awesome-icon :icon="['fas', 'redo-alt']" size="xs" />
+            </div>
+          </b-tag>
+        </b-taglist>
+      </div>
     </div>
     <div class="tag-list m-b-md">
       <p class="has-text-grey m-b-sm">
@@ -232,6 +234,7 @@ export default {
     &.reset-tag {
       background-color: transparent;
       box-shadow: 0 0 2px rgba(10, 10, 10, 0.4);
+      margin: 10px auto 0;
     }
   }
   .tag-div {

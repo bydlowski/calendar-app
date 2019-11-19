@@ -1,6 +1,6 @@
 <template>
   <div class="m-r-lg m-l-lg">
-    <p v-if="deadlineClosed.length" class="title is-2">
+    <p v-if="upcomingEvents.length" class="title is-2">
       Upcoming Events
     </p>
     <div class="columns is-multiline">

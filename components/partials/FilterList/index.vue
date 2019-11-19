@@ -188,19 +188,19 @@ export default {
   },
   methods: {
     checkActiveLocationTag (location) {
-      return this.activeLocationTags.includes(location) ? 'is-van-dark' : 'is-light'
+      return this.activeLocationTags.includes(location) ? 'is-van-secondary' : 'is-light'
     },
     checkActiveTypeTag (type) {
-      return this.activeTypeTags.includes(type) ? 'is-van-dark' : 'is-light'
+      return this.activeTypeTags.includes(type) ? 'is-van-secondary' : 'is-light'
     },
     checkActiveApplicationTag (date) {
-      return (this.activeApplicationTagValue === date.value) ? 'is-van-dark' : 'is-light'
+      return (this.activeApplicationTagValue === date.value) ? 'is-van-secondary' : 'is-light'
     },
     checkActiveStartTag (date) {
-      return (this.activeStartTagValue === date.value) ? 'is-van-dark' : 'is-light'
+      return (this.activeStartTagValue === date.value) ? 'is-van-secondary' : 'is-light'
     },
     checkOnlyFavorites (date) {
-      return (this.onlyFavorites) ? 'is-van-dark' : 'is-light'
+      return (this.onlyFavorites) ? 'is-van-secondary' : 'is-light'
     },
     toggleTag (tagType, value) {
       this.$store.dispatch('tags/toggleTag', { tagType, value })

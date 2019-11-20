@@ -24,6 +24,7 @@
       />
     </div>
     <b-collapse
+      v-if="passedEvents.length"
       :open="false"
       @open="open = !open"
       aria-id="contentIdForA11y3"
@@ -35,10 +36,7 @@
         role="button"
         aria-controls="contentIdForA11y3"
       >
-        <p
-          v-if="passedEvents.length"
-          class="title is-2"
-        >
+        <p class="title is-2">
           Finished events
         </p>
         <a class="card-header-icon is-vertical-center-flex">
@@ -76,7 +74,8 @@
 </template>
 
 <script>
-import * as JsSearch from 'js-search'
+// import * as JsSearch from 'js-search'
+import * as Fuse from 'fuse.js'
 import moment from 'moment'
 import Event from '~/components/elements/Event'
 import Modal from '~/components/elements/Modal'
@@ -99,7 +98,21 @@ export default {
       upcomingEvents: [],
       deadlineClosed: [],
       passedEvents: [],
-      open: false
+      open: false,
+      searchOptions: {
+        shouldSort: true,
+        threshold: 0.6,
+        location: 0,
+        distance: 100,
+        maxPatternLength: 32,
+        minMatchCharLength: 1,
+        keys: [
+          'name',
+          'type',
+          'city',
+          'country'
+        ]
+      }
     }
   },
   computed: {
@@ -154,19 +167,8 @@ export default {
       this.sortEvents(this.filteredEvents)
     },
     searchText () {
-      console.log('SEARCH')
-      // console.log('this.events: ', this.events)
-      const search = new JsSearch.Search('id')
-      search.addIndex('name')
-      search.addIndex('city')
-      search.addIndex('type')
-
-      search.addDocuments(this.events)
-      search.tokenizer.tokenize(this.searchText)
-      // const bla = search.search(this.searchText)
-      // const bla = search.search(this.searchText)
-      // console.log('bla: ', bla)
-      this.searchedEvents = (this.searchText.length > 1) ? search.search(this.searchText) : [...this.events]
+      const fuse = new Fuse(this.events, this.searchOptions)
+      this.searchedEvents = (this.searchText.length > 1) ? fuse.search(this.searchText) : [...this.events]
       this.getFilteredEvents()
       this.sortEvents(this.filteredEvents)
     }

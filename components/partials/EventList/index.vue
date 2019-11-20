@@ -23,6 +23,45 @@
         :content="event"
       />
     </div>
+    <b-collapse
+      :open="false"
+      @open="open = !open"
+      aria-id="contentIdForA11y3"
+      class="collapse-div"
+    >
+      <div
+        slot="trigger"
+        class="card-header collapse-div-btn"
+        role="button"
+        aria-controls="contentIdForA11y3"
+      >
+        <p
+          v-if="passedEvents.length"
+          class="title is-2"
+        >
+          Finished events
+        </p>
+        <a class="card-header-icon is-vertical-center-flex">
+          <font-awesome-icon
+            v-if="open"
+            :icon="['fas', 'caret-up']"
+            size="2x"
+          />
+          <font-awesome-icon
+            v-else
+            :icon="['fas', 'caret-down']"
+            size="2x"
+          />
+        </a>
+      </div>
+      <div class="columns is-multiline">
+        <Event
+          v-for="event in passedEvents"
+          :key="`Past event ${event.id}`"
+          :content="event"
+        />
+      </div>
+    </b-collapse>
     <div
       v-if="filteredEvents.length === 0"
       class="is-vertical-center-flex"
@@ -37,6 +76,7 @@
 </template>
 
 <script>
+import * as JsSearch from 'js-search'
 import moment from 'moment'
 import Event from '~/components/elements/Event'
 import Modal from '~/components/elements/Modal'
@@ -54,10 +94,12 @@ export default {
   },
   data () {
     return {
+      searchedEvents: [],
       filteredEvents: [],
       upcomingEvents: [],
       deadlineClosed: [],
-      passedEvents: []
+      passedEvents: [],
+      open: false
     }
   },
   computed: {
@@ -81,6 +123,9 @@ export default {
     },
     favorites () {
       return this.$store.state.user.favorites
+    },
+    searchText () {
+      return this.$store.state.tags.searchText
     }
   },
   watch: {
@@ -107,9 +152,27 @@ export default {
     favorites () {
       this.getFilteredEvents()
       this.sortEvents(this.filteredEvents)
+    },
+    searchText () {
+      console.log('SEARCH')
+      // console.log('this.events: ', this.events)
+      const search = new JsSearch.Search('id')
+      search.addIndex('name')
+      search.addIndex('city')
+      search.addIndex('type')
+
+      search.addDocuments(this.events)
+      search.tokenizer.tokenize(this.searchText)
+      // const bla = search.search(this.searchText)
+      // const bla = search.search(this.searchText)
+      // console.log('bla: ', bla)
+      this.searchedEvents = (this.searchText.length > 1) ? search.search(this.searchText) : [...this.events]
+      this.getFilteredEvents()
+      this.sortEvents(this.filteredEvents)
     }
   },
   created () {
+    this.searchedEvents = [...this.events]
     this.getFilteredEvents()
     this.sortEvents(this.filteredEvents)
   },
@@ -122,7 +185,7 @@ export default {
         if (!this.favorites) {
           this.filteredEvents = []
         } else {
-          this.filteredEvents = this.events
+          this.filteredEvents = this.searchedEvents
             .filter(event => this.favorites.includes(event.id))
             .filter(event => this.activeTypeTags.includes(event.type))
             .filter(event => this.activeLocationTags.includes(event.city))
@@ -130,7 +193,7 @@ export default {
             .filter(event => moment(event.startDate).isBefore(lastStartDate))
         }
       } else {
-        this.filteredEvents = this.events
+        this.filteredEvents = this.searchedEvents
           .filter(event => this.activeTypeTags.includes(event.type))
           .filter(event => this.activeLocationTags.includes(event.city))
           .filter(event => moment(event.endApplicationDate).isBefore(lastApplicationDate))
@@ -159,5 +222,13 @@ export default {
 <style lang="scss" scoped>
   .tag-list {
     display: flex;
+  }
+  .collapse-div .card-header {
+    box-shadow: none;
+  }
+  .collapse-div-btn {
+    display: flex;
+    // justify-content: space-between;
+    // padding-right: 50%;
   }
 </style>

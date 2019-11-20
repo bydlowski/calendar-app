@@ -7,7 +7,8 @@ export const state = () => ({
   activeApplicationTagValue: 90,
   allStartTags: [],
   activeStartTagValue: 180,
-  onlyFavorites: false
+  onlyFavorites: false,
+  searchText: ''
 })
 
 // COMMIT
@@ -56,6 +57,9 @@ export const mutations = {
     } else if (selection === 'location') {
       state.activeLocationTags = [...state.allLocationTags]
     }
+  },
+  setSearchText (state, value) {
+    state.searchText = value
   }
 }
 
@@ -80,6 +84,9 @@ export const actions = {
   },
   resetTags (vuexContext, selection) {
     vuexContext.commit('resetSpecificTags', selection)
+  },
+  changeSearchText (vuexContext, value) {
+    vuexContext.commit('setSearchText', value)
   }
 }
 

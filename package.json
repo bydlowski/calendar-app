@@ -16,6 +16,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/vue-fontawesome": "^0.1.8",
     "@nuxtjs/axios": "^5.3.6",
+    "js-search": "^1.4.3",
     "nuxt": "^2.0.0",
     "nuxt-buefy": "^0.3.2",
     "vue-flickity": "1.1.2",

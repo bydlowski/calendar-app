@@ -263,6 +263,30 @@
             "flag": "https://cdn4.iconfinder.com/data/icons/world-flags-circular/1000/Flag_of_Colombia_-_Circle-128.png",
             "cover": "https://vanhackblobstorageprod.blob.core.windows.net/img/events/cover/3868c38f-976b-497d-b761-7e0a741d35e5.jpg",
             "thumb": "https://vanhackblobstorageprod.blob.core.windows.net/img/events/thumbnail/44d0f28a-9922-4ae2-9b76-bae55c817778.jpg"
+        },
+        {
+            "id": 2555,
+            "type": "Meetup",
+            "name": "Finished Meetup",
+            "country": "Canada",
+            "city": "Calgary",
+            "state": "Alberta",
+            "slug": "relocation-summit-2019",
+            "promoted": false,
+            "startDate": "2019-10-27T00:00:00",
+            "endDate": "2019-11-04T00:00:00",
+            "startApplicationDate": "2019-09-10T00:00:00",
+            "endApplicationDate": "2019-10-26T00:00:00",
+            "isOnline": false,
+            "eventType": 2,
+            "premium": false,
+            "possibleToApply": true,
+            "subtitle": "November 27 - December 4, 2019",
+            "theEvent": "<p>The new edition of <strong>VanHack Relocation Summit</strong> brings together insights and lessons from exceptional leaders, makers, and innovators in the international tech market - for<strong> 8 days</strong> of inspired conversation and purposeful networking.&nbsp;</p>\n<p>Join us to start changing your life: be part of the biggest online event for <strong>Tech Talent</strong> who want to relocate to Canada or Europe and get closer to your dream job abroad.</p>\n<p><br></p>\n<p><br></p>\n<h2><strong>What to expect from the Relocation Summit?</strong></h2>\n<h2><br></h2>\n<p><strong>Perfect your skills</strong></p>\n<p>An intense week of content to help tech talents like you improve your skills, get the mindset and start your journey to get hired abroad.</p>\n<p><strong>Network and see what your peers are doing</strong></p>\n<p>Not only meet great professionals from the tech industry in Canada and Europe but you will also have the chance to meet people going through the same journey as you toward your job abroad.&nbsp;</p>\n<p><strong>Learn from your tech heroes&nbsp;</strong></p>\n<p>Hear from people that are part of the tech market in Canada and Europe - and the ones who went through the same path as you are now. Learn from the best to make your journey to find a job abroad smoother. &nbsp;</p>\n<p><strong>Make your dreams happen!</strong></p>\n<p>Relocation Summit is a great opportunity to help you turn your dream into a plan and make them happen! Start your journey to find an amazing job abroad, relocate and start a new life.</p>\n<p><br></p>\n<p><br></p>\n<h2><strong>Who should attend?</strong></h2>\n<h2><br></h2>\n<p>Our VanHack Relocation Summit is a virtual conference and networking event for absolutely everyone involved in the development and IT, and are looking to find a tech job abroad.&nbsp;</p>\n<p><br></p>\n<p><br></p>\n<h2><strong>Where? When? How?</strong></h2>\n<h2><br></h2>\n<p>Nov 27th - Dec 4th | Online - You can watch from everywhere in the world!</p>\n<p><br></p>\n<p><br></p>\n<h2><strong>Last year numbers</strong></h2>\n<h2><br></h2>\n<p><strong>+11.000 </strong>participants</p>\n<p><strong>+18 </strong>hours of content</p>\n<p><strong>+20</strong> speakers</p>",
+            "theCandidates": "<p>VanHack is looking for candidates with 3 or more years of professional experience.</p>\n  <p>Candidates also need to have advanced or fluent English and be able to attend the Webinar event on 27 until 4 December in person.</p>\n  <p>Most importantly, candidates must be willing to get a job in Canada and/or Europe, and to relocate in the second semester of 2019.</p>",
+            "flag": "https://vanhackblobstorageprod.blob.core.windows.net/flags/canada.svg",
+            "cover": "https://place-hold.it/1300x600/7b886b/a0ecd0&text=FinishedMeetup&fontsize=60",
+            "thumb": "https://place-hold.it/1300x600/7b886b/a0ecd0&text=FinishedMeetup&fontsize=60"
         }
     ]
 }

@@ -1,25 +1,35 @@
 <template>
   <div class="m-l-md">
-    <h2
-      class="title is-4 has-text-centered"
-    >
+    <h2 class="title is-4 has-text-centered">
       How can we help you?
     </h2>
-    <div class="columns">
+    <b-field>
+      <b-input
+        v-model="searchText"
+        placeholder="Search"
+        type="search"
+        icon="magnify"
+        icon-clickable
+      />
+    </b-field>
+    <h2 class="title is-5 has-text-centered m-b-sm m-t-md">
+      Want some filters?
+    </h2>
+    <div class="columns is-aligned-flex-start">
       <div class="tag-list m-b-md column is-half">
         <p class="has-text-grey m-b-md">
           Event types
         </p>
-        <b-taglist class="columns is-aligned-flex-start">
+        <b-taglist class="columns is-center-flex">
           <div
+            v-for="(type, index) in allTypeTags"
+            :key="`${type}-${index}`"
             @click.prevent="toggleTag('type', type)"
-            class="tag-div"
+            class="tag-div column is-10-widescreen is-offset-1-widescreen is-4-desktop is-4-tablet is-4-mobile"
           >
             <b-tag
-              v-for="(type, index) in allTypeTags"
-              :key="`${type}-${index}`"
               :type="checkActiveTypeTag(type)"
-              class="is-pointer tag-div-parent column is-10 is-offset-1"
+              class="is-pointer"
               rounded
               is-medium
             >
@@ -28,12 +38,12 @@
           </div>
           <div
             @click.prevent="resetTags('type')"
-            class="tag-div"
+            v-if="allTypeTags.length !== activeTypeTags.length"
+            class="reset-div-parent is-center-flex"
           >
             <b-tag
-              v-if="allTypeTags.length !== activeTypeTags.length"
               type="is-light"
-              class="is-pointer tag-div-parent reset-tag"
+              class="is-pointer reset-tag"
               rounded
               is-medium
             >
@@ -46,82 +56,84 @@
         <p class="has-text-grey m-b-md">
           Where?
         </p>
-        <b-taglist class="columns is-aligned-flex-start">
-          <b-tag
+        <b-taglist class="columns is-center-flex">
+          <div
             v-for="(location, index) in allLocationTags"
             :key="`${location}-${index}`"
-            :type="checkActiveLocationTag(location)"
-            class="is-pointer tag-div-parent column is-10 is-offset-1"
-            rounded
-            is-medium
+            @click.prevent="toggleTag('location', location)"
+            class="tag-div column is-10-widescreen is-offset-1-widescreen is-4-desktop is-4-tablet is-4-mobile"
           >
-            <div
-              @click.prevent="toggleTag('location', location)"
-              class="tag-div"
+            <b-tag
+              :type="checkActiveLocationTag(location)"
+              class="is-pointer"
+              rounded
+              is-medium
             >
               {{ location }}
-            </div>
-          </b-tag>
-          <b-tag
-            v-if="allLocationTags.length !== activeLocationTags.length"
-            type="is-light"
-            class="is-pointer tag-div-parent reset-tag"
-            rounded
-            is-medium
+            </b-tag>
+          </div>
+          <div
+            @click.prevent="resetTags('location')"
+            class="reset-div-parent is-center-flex"
           >
-            <div
-              @click.prevent="resetTags('location')"
-              class="tag-div"
+            <b-tag
+              v-if="allLocationTags.length !== activeLocationTags.length"
+              type="is-light"
+              class="is-pointer reset-tag"
+              rounded
+              is-medium
             >
               <font-awesome-icon :icon="['fas', 'redo-alt']" size="xs" />
-            </div>
-          </b-tag>
+            </b-tag>
+          </div>
         </b-taglist>
       </div>
     </div>
-    <div class="tag-list m-b-md">
-      <p class="has-text-grey m-b-sm">
-        When is the application date limit?
-      </p>
-      <b-taglist class="is-center-flex">
-        <b-tag
-          v-for="(date, index) in allApplicationTags"
-          :key="`${date}-${index}-application`"
-          :type="checkActiveApplicationTag(date)"
-          class="is-pointer tag-div-parent"
-          rounded
-          is-medium
-        >
+    <div class="columns is-aligned-flex-start has-text-centered">
+      <div class="tag-list m-b-md column is-half">
+        <p class="has-text-grey m-b-md">
+          When is the application date limit?
+        </p>
+        <b-taglist class="columns is-center-flex">
           <div
+            v-for="(date, index) in allApplicationTags"
+            :key="`${date}-${index}-application`"
             @click.prevent="toggleDateTag('application', date)"
-            class="tag-div"
+            class="tag-div column is-10 is-offset-1"
           >
-            {{ date.label }}
+            <b-tag
+              :type="checkActiveApplicationTag(date)"
+              class="is-pointer"
+              rounded
+              is-medium
+            >
+              {{ date.label }}
+            </b-tag>
           </div>
-        </b-tag>
-      </b-taglist>
-    </div>
-    <div class="tag-list m-b-md">
-      <p class="has-text-grey m-b-sm">
-        When does the event start?
-      </p>
-      <b-taglist class="is-center-flex">
-        <b-tag
-          v-for="(date, index) in allStartTags"
-          :key="`${date}-${index}-start`"
-          :type="checkActiveStartTag(date)"
-          class="is-pointer tag-div-parent"
-          rounded
-          is-medium
-        >
+        </b-taglist>
+      </div>
+      <div class="tag-list m-b-md column is-half">
+        <p class="has-text-grey m-b-md">
+          When is the event start date?
+        </p>
+        <b-taglist class="columns is-center-flex">
           <div
+            v-for="(date, index) in allStartTags"
+            :key="`${date}-${index}-start`"
             @click.prevent="toggleDateTag('start', date)"
-            class="tag-div"
+            class="tag-div column is-10 is-offset-1"
           >
-            {{ date.label }}
+            <b-tag
+              :type="checkActiveStartTag(date)"
+              class="is-pointer"
+              rounded
+              is-medium
+            >
+              {{ date.label }}
+            </b-tag>
           </div>
-        </b-tag>
-      </b-taglist>
+        </b-taglist>
+      </div>
     </div>
     <div class="tag-list">
       <p class="has-text-grey m-b-sm">
@@ -136,7 +148,7 @@
         >
           <div
             @click.prevent="toggleOnlyFavorites()"
-            class="tag-div"
+            class="tag-div sure-tag"
           >
             Sure!
           </div>
@@ -157,6 +169,11 @@ export default {
     events: {
       type: Array,
       required: true
+    }
+  },
+  data () {
+    return {
+      searchText: null
     }
   },
   computed: {
@@ -186,6 +203,11 @@ export default {
     },
     onlyFavorites () {
       return this.$store.state.tags.onlyFavorites
+    }
+  },
+  watch: {
+    searchText () {
+      this.$store.dispatch('tags/changeSearchText', this.searchText)
     }
   },
   methods: {
@@ -227,18 +249,28 @@ export default {
     flex-direction: column;
     align-items: center;
   }
-  .tag-div-parent {
-    padding-left: 0;
-    padding-right: 0;
+  .reset-div-parent {
+    // margin-left: 16%;
+    width: 100%;
 
-    &.reset-tag {
+    .reset-tag {
       background-color: transparent;
       box-shadow: 0 0 2px rgba(10, 10, 10, 0.4);
-      margin: 10px auto 0;
+      margin: 2px auto 0;
     }
   }
   .tag-div {
-    padding-left: .75em;
-    padding-right: .75em;
+    padding: 0;
+    margin-bottom: 2px;
+    span {
+      width: 100%;
+    }
+    @media screen and (max-width: 1215px) {
+      width: 140px;
+      margin: 0 20px;
+    }
+  }
+  .sure-tag {
+    width: 30px !important;
   }
 </style>

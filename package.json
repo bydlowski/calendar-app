@@ -20,7 +20,7 @@
     "nuxt": "^2.0.0",
     "nuxt-buefy": "^0.3.2",
     "vue-flickity": "1.1.2",
-    "vue-moment": "^4.0.0"
+    "vue-moment": "^4.1.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^1.0.1",
